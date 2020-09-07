@@ -13,14 +13,19 @@ class Bookings extends Component {
           multiline
           rows="4"
           placeholder="Enter the hacker list (one hacker per line)"
+          name="hackers"
+          onChange={this.props.handleInputChange}
         />
         <TextField
           className="col-md-6"
           multiline
           rows="4"
           placeholder="Enter the date range for each hacker's stay (one range per line)"
+          name="dates"
+          onChange={this.props.handleInputChange}
         />
-        <Button variant="outlined" color="primary" className="block-center">Get Meals Schedule</Button>
+        <Button variant="outlined" color="primary" className="block-center" 
+          onClick={this.props.handleButtonClick}>Get Meals Schedule</Button>
         </div>);
     }
 }
