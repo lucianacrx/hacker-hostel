@@ -78,7 +78,7 @@ class App extends Component {
     }
 
     getLines(text) {
-        if (text !== undefined) {
+        if (text !== undefined && text !== "") {
             return text.split('\n');
         } else {
             return [];
