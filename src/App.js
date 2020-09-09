@@ -91,7 +91,8 @@ class App extends Component {
                 <h2>Hacker Hostel</h2>
             </center>
             <div className="container">
-                <Bookings handleGuestInfo={this.handleGuestInfo} handleDateInfo={this.handleDateInfo} handleButtonClick={this.handleButtonClick.bind(this)}></Bookings>
+                <Bookings handleGuestInfo={this.handleGuestInfo.bind(this)} handleDateInfo={this.handleDateInfo.bind(this)} 
+                handleButtonClick={this.handleButtonClick.bind(this)}></Bookings>
                 <Error invalidHackers={this.state.invalidHackers}></Error>
                 <Meals hackers={this.state.validHackers}></Meals>
             </div>
