@@ -5,6 +5,18 @@ import Button from '@material-ui/core/Button';
 
 class Bookings extends Component {
 
+    handleGuestInfo(e) {
+      if (e.target.value) {
+        this.props.handleGuestInfo(e);
+      }
+    }
+
+    handleDateInfo(e) {
+      if (e.target.value) {
+        this.props.handleDateInfo(e);
+      }
+    }
+
     render() {
         return (
       <div className="row">
@@ -22,7 +34,7 @@ class Bookings extends Component {
           rows="4"
           placeholder="Enter the date range for each hacker's stay (one range per line)"
           name="dates"
-          onChange={this.props.handleGuestInfo}
+          onChange={this.props.handleDateInfo}
         />
         <Button variant="outlined" color="primary" className="block-center" 
           onClick={this.props.handleButtonClick}>Get Meals Schedule</Button>
