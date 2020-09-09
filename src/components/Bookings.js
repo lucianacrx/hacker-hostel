@@ -25,7 +25,7 @@ class Bookings extends Component {
           onChange={this.props.handleInputChange}
         />
         <Button variant="outlined" color="primary" className="block-center" 
-          onClick={this.props.handleButtonClick}>Get Meals Schedule</Button>
+          onClick={this.props.handleGuestInfo}>Get Meals Schedule</Button>
         </div>);
     }
 }

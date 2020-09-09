@@ -3,7 +3,7 @@ import Bookings from './components/Bookings';
 import Meals from './components/Meals';
 import Error from './components/Error';
 
-import { isValidDate } from './utils/utils';
+import { isValidDate, getDateRange, sortArray } from './utils/utils';
 
 class App extends Component {
 
@@ -22,12 +22,15 @@ class App extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleButtonClick(event) {
-        const invalidHackersList = this.getInvalidHackers();
-        this.setState({invalidHackers: invalidHackersList});
+    handleGuestInfo() {
+        const results = this.getHackersData();
+        this.setState({
+            invalidHackers: results[0],
+            validHackers: results[1]
+        });
     }
 
-    getInvalidHackers() {
+    getHackersData() {
         const hackerList = this.getLines(this.state.hackers);
         const dateList = this.getDates();
 
@@ -38,13 +41,25 @@ class App extends Component {
             if (!isValidDate(dateList[i])) {
                 invalidHackers.push(hackerList[i]);
             } else {
-                validHackers.push(hackerList[i]);
+                const dates = getDateRange(dateList[i]);
+                for (var j = 0; j < dates.length; j++) {
+                    validHackers.push({
+                        name: hackerList[i],
+                        date: dates[j]
+                    });
+                }
             }
         }
 
-        this.setState({validHackers: validHackers});
-        
-        return invalidHackers;
+        sortArray(validHackers);
+
+        validHackers = validHackers.reduce(function (result, userDetails) {
+            result[userDetails.date] = result[userDetails.date] || [];
+            result[userDetails.date].push(userDetails.name);
+            return result;
+        }, Object.create(null));
+
+        return [invalidHackers, validHackers];
     }
 
     getDates() {
@@ -72,7 +87,7 @@ class App extends Component {
                 <h2>Hacker Hostel</h2>
             </center>
             <div className="container">
-                <Bookings handleInputChange={this.handleInputChange.bind(this)} handleButtonClick={this.handleButtonClick.bind(this)}></Bookings>
+                <Bookings handleInputChange={this.handleInputChange.bind(this)} handleGuestInfo={this.handleGuestInfo.bind(this)}></Bookings>
                 <Error invalidHackers={this.state.invalidHackers}></Error>
                 <Meals hackers={this.state.validHackers}></Meals>
             </div>
