@@ -22,7 +22,7 @@ class App extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleGuestInfo() {
+    handleButtonClick() {
         const results = this.getHackersData();
         this.setState({
             invalidHackers: results[0],
@@ -87,7 +87,7 @@ class App extends Component {
                 <h2>Hacker Hostel</h2>
             </center>
             <div className="container">
-                <Bookings handleInputChange={this.handleInputChange.bind(this)} handleGuestInfo={this.handleGuestInfo.bind(this)}></Bookings>
+                <Bookings handleGuestInfo={this.handleInputChange.bind(this)} handleButtonClick={this.handleButtonClick.bind(this)}></Bookings>
                 <Error invalidHackers={this.state.invalidHackers}></Error>
                 <Meals hackers={this.state.validHackers}></Meals>
             </div>
