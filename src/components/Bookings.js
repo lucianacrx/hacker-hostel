@@ -1,19 +1,24 @@
 import React, {Component} from 'react';
-import {PropTypes} from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class Bookings extends Component {
 
+    constructor(props) {
+      super(props);
+    }
+
     handleGuestInfo(e) {
       if (e.target.value) {
-        this.props.handleGuestInfo(e);
+        const hackerList = e.target.value.split('\n');
+        this.props.handleGuestInfo(hackerList);
       }
     }
 
     handleDateInfo(e) {
       if (e.target.value) {
-        this.props.handleDateInfo(e);
+        const dateList = e.target.value.split('\n');
+        this.props.handleDateInfo(dateList);
       }
     }
 
@@ -26,7 +31,7 @@ class Bookings extends Component {
           rows="4"
           placeholder="Enter the hacker list (one hacker per line)"
           name="hackers"
-          onChange={this.props.handleGuestInfo}
+          onChange={this.handleGuestInfo.bind(this)}
         />
         <TextField
           className="col-md-6"
@@ -34,7 +39,7 @@ class Bookings extends Component {
           rows="4"
           placeholder="Enter the date range for each hacker's stay (one range per line)"
           name="dates"
-          onChange={this.props.handleDateInfo}
+          onChange={this.handleDateInfo.bind(this)}
         />
         <Button variant="outlined" color="primary" className="block-center" 
           onClick={this.props.handleButtonClick}>Get Meals Schedule</Button>

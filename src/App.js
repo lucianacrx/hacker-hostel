@@ -16,14 +16,18 @@ class App extends Component {
             invalidHackers: [],
             validHackers: []
         };
+
+        this.handleGuestInfo = this.handleGuestInfo.bind(this);
+        this.handleDateInfo = this.handleDateInfo.bind(this);
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
-    handleGuestInfo(event) {
-        this.setState({[event.target.name]: event.target.value});
+    handleGuestInfo(hackerList) {
+        this.setState({hackers: hackerList});
     }
     
-    handleDateInfo(event) {
-        this.setState({[event.target.name]: event.target.value});
+    handleDateInfo(dateList) {
+        this.setState({dates: dateList});
     }
 
     handleButtonClick() {
@@ -35,8 +39,8 @@ class App extends Component {
     }
 
     getHackersData() {
-        const hackerList = this.getLines(this.state.hackers);
-        const dateList = this.getDates();
+        const hackerList = this.state.hackers;
+        const dateList = this.state.dates;
 
         var invalidHackers = [];
         var validHackers = [];
@@ -66,33 +70,14 @@ class App extends Component {
         return [invalidHackers, validHackers];
     }
 
-    getDates() {
-        const dates = this.getLines(this.state.dates);
-        return dates.map(range => {
-            const splittedDate = range.split(" to ");
-            return {
-                from: splittedDate[0],
-                to: splittedDate[1]
-            };
-        });
-    }
-
-    getLines(text) {
-        if (text !== undefined && text !== "") {
-            return text.split('\n');
-        } else {
-            return [];
-        }
-    }
-
     render() {
         return (<div className="container-fluid">
             <center>
                 <h2>Hacker Hostel</h2>
             </center>
             <div className="container">
-                <Bookings handleGuestInfo={this.handleGuestInfo.bind(this)} handleDateInfo={this.handleDateInfo.bind(this)} 
-                handleButtonClick={this.handleButtonClick.bind(this)}></Bookings>
+                <Bookings handleGuestInfo={this.handleGuestInfo} handleDateInfo={this.handleDateInfo} 
+                handleButtonClick={this.handleButtonClick}></Bookings>
                 <Error invalidHackers={this.state.invalidHackers}></Error>
                 <Meals hackers={this.state.validHackers}></Meals>
             </div>
