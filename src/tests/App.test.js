@@ -53,7 +53,12 @@ describe('Hacker Hostel <App />', () => {
     wrapper.find(Button).simulate('click');
     const content = wrapper.text();
     // TODO: validate the order as well
-    expect(content).toContain("Breakfast for John Doe on 2018-9-15Breakfast for Johhny Alsodoes on 2018-9-15Lunch for John Doe on 2018-9-15Lunch for Johhny Alsodoes on 2018-9-15Dinner for John Doe on 2018-9-15")
+    expect(content).toContain("Breakfast for John Doe on 2018-9-15");
+    expect(content).toContain("Breakfast for Johhny Alsodoes on 2018-9-15");
+    expect(content).toContain("Lunch for John Doe on 2018-9-15");
+    expect(content).toContain("Lunch for Johhny Alsodoes on 2018-9-15");
+    expect(content).toContain("Dinner for John Doe on 2018-9-15");
+    expect(content).toContain("Dinner for Johhny Alsodoes on 2018-9-15");
     expect(content).not.toContain("Error! No menu generated for Johhny Alsodoes")
     expect(content).not.toContain("Error! No menu generated for John Doe")
   });

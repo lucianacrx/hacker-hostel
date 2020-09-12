@@ -10,14 +10,14 @@ class Bookings extends Component {
 
     handleGuestInfo(e) {
       if (e.target.value) {
-        const hackerList = e.target.value.split('\n');
+        const hackerList = e.target.value.split(/(?:\n|\\n)/);
         this.props.handleGuestInfo(hackerList);
       }
     }
 
     handleDateInfo(e) {
       if (e.target.value) {
-        const dateList = e.target.value.split('\n');
+        const dateList = e.target.value.split(/(?:\n|\\n)/);
         this.props.handleDateInfo(dateList);
       }
     }

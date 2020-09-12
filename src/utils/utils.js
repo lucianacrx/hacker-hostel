@@ -1,8 +1,12 @@
 export function isValidDate(date) {
-    const splittedDate = splitDate(date);
-    const dateExp = /^(?:(19|20)[0-9]{2})[-.](0[1-9]|1[012])[-.](0[1-9]|1[0-9]|2[0-9]|[12][0-9]|3[01])$/;
-    if (splittedDate !== undefined) {
-        return dateExp.test(splittedDate.from) && dateExp.test(splittedDate.to) && (new Date(splittedDate.to) >= new Date(splittedDate.from));
+    if (date !== undefined) {
+        const splittedDate = splitDate(date);
+        const dateExp = /^(?:(19|20)[0-9]{2})[-.](0[1-9]|1[012])[-.](0[1-9]|1[0-9]|2[0-9]|[12][0-9]|3[01])$/;
+        if (splittedDate !== undefined) {
+            return dateExp.test(splittedDate.from) && dateExp.test(splittedDate.to) && (new Date(splittedDate.to) >= new Date(splittedDate.from));
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
@@ -22,13 +26,13 @@ export function getDateRange(date) {
 
     let startDate = new Date(splittedDate.from + ' EDT');
     let day = startDate.getDate();
-    let month = startDate.getMonth();
+    let month = startDate.getMonth() + 1;
     let year = startDate.getFullYear();
     startDate = [year, month, day].join("-");
 
     let endDate = new Date(splittedDate.to + ' EDT');
     let endDay = endDate.getDate();
-    let endMonth = endDate.getMonth();
+    let endMonth = endDate.getMonth() + 1;
     let endYear = endDate.getFullYear();
     endDate = [endYear, endMonth, endDay].join("-");
 
